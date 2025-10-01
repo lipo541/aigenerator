@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
     const timestamp = Date.now();
     const fileName = `${user.id}/${timestamp}.png`;
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from("images")
       .upload(fileName, generatedImageBlob, {
         contentType: "image/png",
@@ -195,7 +195,7 @@ async function generateTextToImage(
 async function generateImageToImage(
   prompt: string,
   style: string,
-  image: File
+  _image: File
 ): Promise<Blob> {
   // For now, just do text-to-image ignoring the uploaded image
   // Image-to-Image requires different API setup or paid service

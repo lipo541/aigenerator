@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { priceId, credits } = await request.json();
+    const { credits } = await request.json();
 
     // TODO: Stripe Checkout Session-ის შექმნა
     // const session = await stripe.checkout.sessions.create({
@@ -73,10 +73,11 @@ export async function POST(request: NextRequest) {
       remainingCredits: data.remaining_credits 
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Checkout error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Payment failed";
     return NextResponse.json(
-      { error: error.message || "Payment failed" },
+      { error: errorMessage },
       { status: 500 }
     );
   }

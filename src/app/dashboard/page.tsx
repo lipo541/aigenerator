@@ -134,9 +134,10 @@ export default function DashboardPage() {
       alert(data.message);
       setShowPricingModal(false);
       fetchProfile(); // Refresh credits
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Purchase error:", error);
-      alert(`❌ შეცდომა: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      alert(`❌ შეცდომა: ${errorMessage}`);
     }
   };
 
@@ -191,9 +192,10 @@ export default function DashboardPage() {
       );
 
       alert("✅ სურათი წარმატებით გენერირდა!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Generation error:", error);
-      alert(`❌ შეცდომა: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      alert(`❌ შეცდომა: ${errorMessage}`);
     } finally {
       setGenerating(false);
     }

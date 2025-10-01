@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
-import WebcamCapture from "./WebcamCapture";
+import { useState } from "react";
 
 interface GenerateFormProps {
   remainingCredits: number;
